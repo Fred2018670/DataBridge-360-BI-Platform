@@ -89,11 +89,14 @@ Total DQ Issues:
 An operational data governance metric that aggregates total validation exceptions caught and isolated by the T-SQL ETL engine.
 
 2. **`Total DQ Issues`**:
+   An operational data governance metric that aggregates total validation exceptions caught and isolated by the T-SQL ETL engine.
+   ```dax
 Total DQ Issues = SUM(vw_DataQualityDashboard[TotalViolations])
 Data Health Index %:
-An advanced executive KPI that calculates data ingestion efficiency. It computes the percentage of pristine rows successfully loaded into the reporting warehouse versus total data payloads processed.
 
 3. **`Data Health Index %`**:
+An advanced executive KPI that calculates data ingestion efficiency. It computes the percentage of pristine rows successfully loaded into the reporting warehouse versus total data payloads processed.
+   ```dax
 Data Health Index % = 
 VAR CleanRows = COUNTROWS(FactSales)
 VAR ErrorRows = SUM(vw_DataQualityDashboard[TotalViolations])
