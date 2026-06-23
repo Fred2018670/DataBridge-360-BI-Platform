@@ -117,7 +117,6 @@ DIVIDE(CurrentMonthIssues - PreviousMonthIssues, PreviousMonthIssues, 0)
 ### 5. **`Rolling 30-Day Clean Revenue Trend`**
 A moving calculation used to monitor revenue stability exclusively from validated records, filtering out short-term operational data shocks.
 ```dax
-Code snippet
 Rolling 30D Clean Revenue = 
 CALCULATE(
     [Total Revenue],
