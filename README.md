@@ -85,25 +85,25 @@ To transition the dashboard from basic column implicit sums to a high-performanc
 An explicit core financial aggregation that computes total corporate income across valid transactional records.
 ```dax
 Total Revenue = SUM(FactSales[Revenue])
-2. Total DQ Issues
+```
+### 2. **`Total DQ Issues`**
 An operational data governance metric that aggregates total validation exceptions caught and isolated by the T-SQL ETL engine.
-
-Code snippet
+```dax
 Total DQ Issues = SUM(vw_DataQualityDashboard[TotalViolations])
-3. Data Health Index %
+```
+### 3. **`Data Health Index %`**
 An advanced executive KPI that calculates data ingestion efficiency. It computes the percentage of pristine rows successfully loaded into the reporting warehouse versus total data payloads processed.
-
-Code snippet
+```dax
 Data Health Index % = 
 VAR CleanRows = COUNTROWS(FactSales)
 VAR ErrorRows = SUM(vw_DataQualityDashboard[TotalViolations])
 VAR TotalRows = CleanRows + ErrorRows
 RETURN
 DIVIDE(CleanRows, TotalRows, 0)
-4. Data Quality MoM Issue Variance
+```
+### 4. **`Data Quality MoM Issue Variance`**
 A data governance tracking metric that measures the month-over-month percentage change in isolated records to alert engineers to deteriorating source data streams.
-
-Code snippet
+```dax
 DQ MoM Issue Variance = 
 VAR CurrentMonthIssues = [Total DQ Issues]
 VAR PreviousMonthIssues = 
@@ -113,9 +113,10 @@ VAR PreviousMonthIssues =
     )
 RETURN
 DIVIDE(CurrentMonthIssues - PreviousMonthIssues, PreviousMonthIssues, 0)
-5. Rolling 30-Day Clean Revenue Trend
+```
+### 5. **`Rolling 30-Day Clean Revenue Trend`**
 A moving calculation used to monitor revenue stability exclusively from validated records, filtering out short-term operational data shocks.
-
+```dax
 Code snippet
 Rolling 30D Clean Revenue = 
 CALCULATE(
@@ -127,10 +128,10 @@ CALCULATE(
         DAY
     )
 )
-6. Customer Cohort Dynamic LTV (Clean Data)
+```
+### 6. **`Customer Cohort Dynamic LTV (Clean Data)`**
 An analytical behavior calculation that determines dynamic customer Lifetime Value exclusively from verified accounts, allowing marketing teams to analyze spending cohorts without data distortion.
-
-Code snippet
+```dax
 Customer Cohort Dynamic LTV = 
 CALCULATE(
     [Total Revenue],
@@ -139,3 +140,4 @@ CALCULATE(
         DimCustomer[CustomerFirstPurchaseDate] <= MAX(DimDate[FullDate])
     )
 )
+```
